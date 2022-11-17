@@ -7,7 +7,7 @@ describe("Todo List Test Suite", () => {
   beforeAll(() => {
     add({
       title: "Test",
-      dueDate: new Date().toISOString().split("T")[0],
+      dueDate: new Date().toLocaleDateString("en-CA"),
       completed: false,
     });
   });
@@ -16,7 +16,7 @@ describe("Todo List Test Suite", () => {
     const todoLength = all.length;
     add({
       title: "Test",
-      dueDate: new Date().toISOString().split("T")[0],
+      dueDate: new Date().toLocaleDateString("en-CA"),
       completed: false,
     });
     expect(all.length).toBe(todoLength + 1);
@@ -31,9 +31,9 @@ describe("Todo List Test Suite", () => {
     overdueLength = overdue().length;
     add({
       title: "Test over due",
-      dueDate: new Date(new Date().setDate(new Date().getDate() - 1))
-        .toISOString()
-        .split("T")[0],
+      dueDate: new Date(
+        new Date().setDate(new Date().getDate() - 1)
+      ).toLocaleDateString("en-CA"),
       completed: false,
     });
     expect(overdue().length).toBe(overdueLength + 1);
@@ -43,7 +43,7 @@ describe("Todo List Test Suite", () => {
     dueTodayLength = dueToday().length;
     add({
       title: "Test due today",
-      dueDate: new Date().toISOString().split("T")[0],
+      dueDate: new Date().toLocaleDateString("en-CA"),
       completed: false,
     });
     expect(dueToday().length).toBe(dueTodayLength + 1);
@@ -53,9 +53,9 @@ describe("Todo List Test Suite", () => {
     dueLaterLength = dueLater().length;
     add({
       title: "Test due later",
-      dueDate: new Date(new Date().setDate(new Date().getDate() + 1))
-        .toISOString()
-        .split("T")[0],
+      dueDate: new Date(
+        new Date().setDate(new Date().getDate() + 1)
+      ).toLocaleDateString("en-CA"),
       completed: false,
     });
     expect(dueLater().length).toBe(dueLaterLength + 1);

@@ -9,74 +9,34 @@ function todoList() {
   };
 
   const overdue = () => {
-    temp = [];
-    let i = 0;
-    const today = formattedDate(dateToday);
-
-    for (i = 0; i < all.length; i++) {
-      if (all[i].dueDate < today) {
-        temp.push(all[i]);
-      }
-    }
-
-    return temp;
+    return all.filter(
+      (item) => item.dueDate < new Date().toLocaleDateString("en-CA")
+    );
   };
 
   const dueToday = () => {
-    temp = [];
-    let i = 0;
-    const today = formattedDate(dateToday);
-
-    for (i = 0; i < all.length; i++) {
-      if (all[i].dueDate === today) {
-        temp.push(all[i]);
-      }
-    }
-
-    return temp;
+    return all.filter(
+      (item) => item.dueDate === new Date().toLocaleDateString("en-CA")
+    );
   };
 
   const dueLater = () => {
-    temp = [];
-    let i = 0;
-    const today = formattedDate(dateToday);
-
-    for (i = 0; i < all.length; i++) {
-      if (all[i].dueDate > today) {
-        temp.push(all[i]);
-      }
-    }
-
-    return temp;
+    return all.filter(
+      (item) => item.dueDate > new Date().toLocaleDateString("en-CA")
+    );
   };
 
   const toDisplayableList = (list) => {
-    let i = 0;
-    let string = "";
+    let temp = list
+      .map(
+        (item) =>
+          `${item.completed ? "[x] " : "[ ] "}${item.title} ${
+            item.dueDate === today ? " " : item.dueDate
+          }`
+      )
+      .join("\n");
 
-    for (i = 0; i < list.length; i++) {
-      string += "[";
-
-      if (list[i].completed) {
-        string += "x";
-      } else {
-        string += " ";
-      }
-
-      string += "] ";
-      string += list[i].title;
-      const today = formattedDate(dateToday);
-      if (list[i].dueDate !== today) {
-        string += " ";
-        string += list[i].dueDate;
-      }
-
-      if (i !== list.length - 1) {
-        string += "\n";
-      }
-    }
-
-    return string;
+    return temp;
   };
 
   return {
